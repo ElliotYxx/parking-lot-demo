@@ -1,6 +1,6 @@
 package com.sheva.parkinglotdemo.utils;
 
-import com.sheva.parkinglotdemo.Constant;
+import com.sheva.parkinglotdemo.constant.Constant;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -365,7 +365,7 @@ public class ImageUtil {
     /**
      *
      * @param inMat
-     * @param dst
+     * @param rect
      * @param rect 正矩形
      */
     public static void drawRectangle(Mat inMat, Rect rect) {

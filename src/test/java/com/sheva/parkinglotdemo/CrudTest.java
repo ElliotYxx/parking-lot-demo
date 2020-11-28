@@ -28,6 +28,5 @@ public class CrudTest {
     public void userServiceTest(){
         userService.saveUser(new User("admin", "admin"));
         adminService.updateUserState(1L, 0);
-
     }
 }

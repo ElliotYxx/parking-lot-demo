@@ -37,13 +37,6 @@ public class UserController {
         return "user/index";
     }
 
-    @GetMapping("userList")
-    public String findUser(){
-        User user = userService.findUserById(1L);
-        log.info(user.toString());
-        return "user/index";
-    }
-
     @PostMapping("login")
     @ResponseBody
     public AjaxReturnMsg login(HttpServletRequest req) {

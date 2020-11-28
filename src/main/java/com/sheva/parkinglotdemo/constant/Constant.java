@@ -1,4 +1,4 @@
-package com.sheva.parkinglotdemo;
+package com.sheva.parkinglotdemo.constant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,17 +11,20 @@ public class Constant {
 
     public static final String UTF8 = "UTF-8";
 
-    // 使用项目的相对路径
-    // public static String BASE_DIR = "./";
+    /**
+     * 相对路径
+     */
+    //public static String BASE_DIR = "./";
     /**
      * 使用项目的绝对路径
      */
     public static final String BASE_DIR = "/Users/sheva/IdeaProjects/parking-lot-demo/";
 
 
-    // 车牌识别相关路径
     public static final String DEFAULT_DIR = BASE_DIR + "PlateDetect/";
-    // 车牌识别， 默认图片处理过程temp路径
+    /**
+     * 处理过程与测试过程目录
+     */
     public static final String DEFAULT_TEMP_DIR = BASE_DIR + "PlateDetect/temp/";
     public static final String DEFAULT_TEST_DIR = BASE_DIR + "PlateDetect/test/";
 
@@ -32,8 +35,6 @@ public class Constant {
     public static final String DEFAULT_ANN_PATH = "model/ann.xml";
     public static final String DEFAULT_ANN_CN_PATH = "model/ann_cn.xml";
     public static final String DEFAULT_ANN_GREEN_PATH = "model/ann_green.xml";
-    public static final String DEFAULT_FACE_MODEL_PATH = "model/haarcascade_frontalface_default.xml";
-    public static final String DEFAULT_PLATE_MODEL_PATH = "model/harrcascade_frontplate.xml";
 
     // 图片中，车牌图块尺寸允许的像素值范围  (width * height * multiple)
     public static final Integer DEFAULT_MIN_SIZE = 44 * 14 * 1;
@@ -56,7 +57,9 @@ public class Constant {
     public static final Integer DEFAULT_MIN_SHEAR_PX = 8;
     public static final Integer DEFAULT_MAX_SHEAR_PX = 40;
 
-    // 判断是否车牌的正则表达式
+    /**
+     * 判断是否是车牌的正则表达式
+     */
     public static final String plateReg = "([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1})";
 
     public static final int predictSize = 10;
