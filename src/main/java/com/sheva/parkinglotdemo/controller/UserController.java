@@ -2,15 +2,15 @@ package com.sheva.parkinglotdemo.controller;
 
 import com.sheva.parkinglotdemo.entity.AjaxReturnMsg;
 import com.sheva.parkinglotdemo.entity.User;
+import com.sheva.parkinglotdemo.exception.LoginException;
 import com.sheva.parkinglotdemo.service.UserService;
 import com.sheva.parkinglotdemo.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @Controller
+@CrossOrigin
 @RequestMapping("user")
 public class UserController {
 
@@ -39,21 +40,18 @@ public class UserController {
 
     @PostMapping("login")
     @ResponseBody
-    public AjaxReturnMsg login(HttpServletRequest req) {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        AjaxReturnMsg msg = new AjaxReturnMsg();
-        log.info("接收到的用户名：" + username + "  接收到的密码：" + password);
+    public User login(@RequestBody User reqUser) {
+        String username = reqUser.getUsername();
+        String password = reqUser.getPassword();
+        log.info("username：" + username + " password：" + password);
         User user = userService.findByUsername(username);
         if (null == user || !user.getPassword().equals(EncryptUtil.encryptPassword(username, password))){
-            log.error("用户不存在或密码错误...");
-            return msg;
+            log.error("user doesn't exist or password is wrong...");
+            throw new LoginException("用户不存在或密码错误...");
         }
 
-        msg.setFlag(1);
-        msg.setUsername(username);
-        log.info("用户:" + username + "登录成功...");
-        return msg;
+        log.info("user:[ " + username + " ]login successfully...");
+        return reqUser;
     }
 
     @PostMapping("register")
@@ -85,6 +83,5 @@ public class UserController {
             log.warn("数据库中已存在该用户");
         }
         return msg;
-
     }
 }
