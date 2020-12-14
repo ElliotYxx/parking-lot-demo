@@ -1,7 +1,7 @@
 package com.sheva.parkinglotdemo.train;
 
 import com.google.common.collect.Sets;
-import com.sheva.parkinglotdemo.constant.Constant;
+import com.sheva.parkinglotdemo.constant.Constants;
 import com.sheva.parkinglotdemo.utils.FileUtil;
 import com.sheva.parkinglotdemo.utils.PlateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class CnANNTrain {
     /**
      * 默认的训练操作的根目录
      */
-    private static final String DEFAULT_PATH = Constant.DEFAULT_DIR + "train/chars_recognise_ann/";
+    private static final String DEFAULT_PATH = Constants.DEFAULT_DIR + "train/chars_recognise_ann/";
 
     /**
      * 训练模型保存位置
@@ -49,10 +49,10 @@ public class CnANNTrain {
         ;
 
         // 加载汉字字符
-        for (int i = 0; i < Constant.strChinese.length; i++) {
+        for (int i = 0; i < Constants.strChinese.length; i++) {
 
             sampleDir.clear();
-            sampleDir.add(DEFAULT_PATH + "learn/" + Constant.strChinese[i]);
+            sampleDir.add(DEFAULT_PATH + "learn/" + Constants.strChinese[i]);
 
             Vector<String> files = new Vector<String>();
             for (String str : sampleDir) {
@@ -68,7 +68,7 @@ public class CnANNTrain {
 
         samples.convertTo(samples, CvType.CV_32F);
 
-        Mat classes = Mat.zeros(trainingLabels.size(), Constant.strChinese.length, CvType.CV_32F);
+        Mat classes = Mat.zeros(trainingLabels.size(), Constants.strChinese.length, CvType.CV_32F);
 
         float[] labels = new float[trainingLabels.size()];
         for (int i = 0; i < labels.length; ++i) {
@@ -101,7 +101,7 @@ public class CnANNTrain {
     public static void main(String[] args) {
         CnANNTrain CnAnnTrain = new CnANNTrain();
         long start = System.currentTimeMillis();
-        CnAnnTrain.train(Constant.predictSize, Constant.neurons);
+        CnAnnTrain.train(Constants.predictSize, Constants.neurons);
         long end = System.currentTimeMillis();
         long time = end - start;
         log.info("The process last:" + time + "ms");

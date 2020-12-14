@@ -23,7 +23,6 @@ public class AdminServiceImpl implements AdminService {
 
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public void updateUserState(Long userId, Integer state) {
         userRepository.updateUserState(userId, state);
     }

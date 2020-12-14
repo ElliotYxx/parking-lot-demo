@@ -3,7 +3,7 @@ package com.sheva.parkinglotdemo.utils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.sheva.parkinglotdemo.constant.Constant;
+import com.sheva.parkinglotdemo.constant.Constants;
 import com.sheva.parkinglotdemo.entity.PlateRecordResult;
 import com.sheva.parkinglotdemo.enumtype.Direction;
 import com.sheva.parkinglotdemo.enumtype.PlateColor;
@@ -43,10 +43,10 @@ public class PlateUtil {
         ann_blue = ANN_MLP.create();
         ann_green = ANN_MLP.create();
         ann_cn = ANN_MLP.create();
-        loadSvmModel(Constant.DEFAULT_SVM_PATH);
-        loadAnnBlueModel(Constant.DEFAULT_ANN_PATH);
-        loadAnnGreenModel(Constant.DEFAULT_ANN_GREEN_PATH);
-        loadAnnCnModel(Constant.DEFAULT_ANN_CN_PATH);
+        loadSvmModel(Constants.DEFAULT_SVM_PATH);
+        loadAnnBlueModel(Constants.DEFAULT_ANN_PATH);
+        loadAnnGreenModel(Constants.DEFAULT_ANN_GREEN_PATH);
+        loadAnnCnModel(Constants.DEFAULT_ANN_CN_PATH);
     }
 
     public static void loadSvmModel(String path) {
@@ -76,7 +76,7 @@ public class PlateUtil {
      * @return
      */
     public static Boolean isPlate(String str) {
-        Pattern p = Pattern.compile(Constant.plateReg);
+        Pattern p = Pattern.compile(Constants.plateReg);
         Boolean bl = false;
         Matcher m = p.matcher(str);
         while (m.find()) {
@@ -210,7 +210,7 @@ public class PlateUtil {
      */
     public static void hasPlate(Vector<Mat> inMat, Vector<Mat> dst, Boolean debug, String tempPath) {
         for (Mat src : inMat) {
-            if (src.rows() == Constant.DEFAULT_HEIGHT && src.cols() == Constant.DEFAULT_WIDTH) { // 尺寸限制; 已经结果resize了，此处判断一下
+            if (src.rows() == Constants.DEFAULT_HEIGHT && src.cols() == Constants.DEFAULT_WIDTH) { // 尺寸限制; 已经结果resize了，此处判断一下
                 Mat samples = SVMTrain.getFeature(src);
                 float flag = svm.predict(samples);
                 if (flag == 0) { // 目标符合
@@ -585,24 +585,24 @@ public class PlateUtil {
      * @return
      */
     public static void predict(Mat img, PlateColor color, PlateRecordResult chars) {
-        Mat f = PlateUtil.features(img, Constant.predictSize);
+        Mat f = PlateUtil.features(img, Constants.predictSize);
 
         int index = 0;
         Double maxVal = -2D;
-        Mat output = new Mat(1, Constant.strCharacters.length, CvType.CV_32F);
+        Mat output = new Mat(1, Constants.strCharacters.length, CvType.CV_32F);
         if(color.equals(PlateColor.GREEN)) {
             ann_green.predict(f, output); // 预测结果
         } else {
             ann_blue.predict(f, output); // 预测结果
         }
-        for (int j = 0; j < Constant.strCharacters.length; j++) {
+        for (int j = 0; j < Constants.strCharacters.length; j++) {
             double val = output.get(0, j)[0];
             if (val > maxVal) {
                 maxVal = val;
                 index = j;
             }
         }
-        String result = String.valueOf(Constant.strCharacters[index]);
+        String result = String.valueOf(Constants.strCharacters[index]);
         chars.setChars(result);
         chars.setConfi(maxVal);
     }
@@ -614,21 +614,21 @@ public class PlateUtil {
      * @return
      */
     public static void predictChinese(Mat img, PlateRecordResult chinese) {
-        Mat f = PlateUtil.features(img, Constant.predictSize);
+        Mat f = PlateUtil.features(img, Constants.predictSize);
         int index = 0;
         Double maxVal = -2D;
 
-        Mat output = new Mat(1, Constant.strChinese.length, CvType.CV_32F);
+        Mat output = new Mat(1, Constants.strChinese.length, CvType.CV_32F);
         ann_cn.predict(f, output); // 预测结果
-        for (int j = 0; j < Constant.strChinese.length; j++) {
+        for (int j = 0; j < Constants.strChinese.length; j++) {
             double val = output.get(0, j)[0];
             if (val > maxVal) {
                 maxVal = val;
                 index = j;
             }
         }
-        String result = Constant.strChinese[index];
-        chinese.setChars(Constant.KEY_CHINESE_MAP.get(result));
+        String result = Constants.strChinese[index];
+        chinese.setChars(Constants.KEY_CHINESE_MAP.get(result));
         chinese.setConfi(maxVal);
     }
 
@@ -659,12 +659,12 @@ public class PlateUtil {
             int midx = mr.x + mr.width / 2;
 
             if (PlateColor.GREEN.equals(color)) {
-                if ((mr.width > maxWidth * 0.8 || mr.height > maxHeight * 0.8) && (midx < Constant.DEFAULT_WIDTH * 2 / 8 && midx > Constant.DEFAULT_WIDTH / 8)) {
+                if ((mr.width > maxWidth * 0.8 || mr.height > maxHeight * 0.8) && (midx < Constants.DEFAULT_WIDTH * 2 / 8 && midx > Constants.DEFAULT_WIDTH / 8)) {
                     specIndex = i;
                 }
             } else {
                 // 如果一个字符有一定的大小，并且在整个车牌的1/7到2/7之间，则是我们要找的特殊车牌
-                if ((mr.width > maxWidth * 0.8 || mr.height > maxHeight * 0.8) && (midx < Constant.DEFAULT_WIDTH * 2 / 7 && midx > Constant.DEFAULT_WIDTH / 7)) {
+                if ((mr.width > maxWidth * 0.8 || mr.height > maxHeight * 0.8) && (midx < Constants.DEFAULT_WIDTH * 2 / 7 && midx > Constants.DEFAULT_WIDTH / 7)) {
                     specIndex = i;
                 }
             }
@@ -881,8 +881,8 @@ public class PlateUtil {
     public static void main(String[] args) {
         Instant start = Instant.now();
 
-        String tempPath = Constant.DEFAULT_TEMP_DIR;
-        String filename = Constant.DEFAULT_DIR + "test/10.jpg";
+        String tempPath = Constants.DEFAULT_TEMP_DIR;
+        String filename = Constants.DEFAULT_DIR + "test/10.jpg";
         File f = new File(filename);
         if (!f.exists()) {
             File f1 = new File(filename.replace("jpg", "png"));

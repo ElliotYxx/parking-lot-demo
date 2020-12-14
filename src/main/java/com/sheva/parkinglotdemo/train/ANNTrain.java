@@ -1,7 +1,7 @@
 package com.sheva.parkinglotdemo.train;
 
 import com.google.common.collect.Sets;
-import com.sheva.parkinglotdemo.constant.Constant;
+import com.sheva.parkinglotdemo.constant.Constants;
 import com.sheva.parkinglotdemo.utils.FileUtil;
 import com.sheva.parkinglotdemo.utils.PlateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ public class ANNTrain {
     /**
      * 默认的训练操作的根目录
      */
-    private static final String DEFAULT_PATH = Constant.DEFAULT_DIR + "train/chars_recognise_ann/";
+    private static final String DEFAULT_PATH = Constants.DEFAULT_DIR + "train/chars_recognise_ann/";
 
     /**
      * 训练模型保存位置
@@ -56,9 +56,9 @@ public class ANNTrain {
         Set<String> sampleDir = Sets.newHashSet();
 
         //加载数字以及字母字符
-        for (int i = 0; i < Constant.numCharacter; i++) {
+        for (int i = 0; i < Constants.numCharacter; i++) {
             sampleDir.clear();
-            sampleDir.add(DEFAULT_PATH + "learn/" + Constant.strCharacters[i]);
+            sampleDir.add(DEFAULT_PATH + "learn/" + Constants.strCharacters[i]);
             Vector<String> files = new Vector<>();
 
             for (String str : sampleDir){
@@ -73,7 +73,7 @@ public class ANNTrain {
             }
         }
         samples.convertTo(samples, CvType.CV_32F);
-        Mat classes = Mat.zeros(trainingLabels.size(), Constant.strCharacters.length, CvType.CV_32F);
+        Mat classes = Mat.zeros(trainingLabels.size(), Constants.strCharacters.length, CvType.CV_32F);
 
         float[] labels = new float[trainingLabels.size()];
         for (int i = 0; i < labels.length; ++i) {
@@ -106,7 +106,7 @@ public class ANNTrain {
     public static void main(String[] args) {
         ANNTrain annTrain = new ANNTrain();
         long start = System.currentTimeMillis();
-        annTrain.train(Constant.predictSize, Constant.neurons);
+        annTrain.train(Constants.predictSize, Constants.neurons);
         long end = System.currentTimeMillis();
         long time = end - start;
         log.info("The process last:" + time + "ms");

@@ -1,7 +1,7 @@
 package com.sheva.parkinglotdemo.train;
 
 import com.google.common.collect.Lists;
-import com.sheva.parkinglotdemo.constant.Constant;
+import com.sheva.parkinglotdemo.constant.Constants;
 import com.sheva.parkinglotdemo.enumtype.Direction;
 import com.sheva.parkinglotdemo.utils.FileUtil;
 import com.sheva.parkinglotdemo.utils.GenerateIdUtil;
@@ -32,7 +32,7 @@ public class SVMTrain {
     /**
      * 训练数据保存位置
      */
-    private static final String DEFAULT_PATH = Constant.DEFAULT_DIR + "train/plate_detect_svm/";
+    private static final String DEFAULT_PATH = Constants.DEFAULT_DIR + "train/plate_detect_svm/";
 
     /**
      * 训练模型保存位置
@@ -47,9 +47,9 @@ public class SVMTrain {
         log.info("SVM train start...");
 
         // 正样本  // 136 × 36 像素  训练的源图像文件要相同大小
-         List<File> imgList0 = FileUtil.listFile(new File(DEFAULT_PATH + "learn/HasPlate"), Constant.DEFAULT_TYPE, false);
+         List<File> imgList0 = FileUtil.listFile(new File(DEFAULT_PATH + "learn/HasPlate"), Constants.DEFAULT_TYPE, false);
         // 负样本   // 136 × 36 像素 训练的源图像文件要相同大小
-         List<File> imgList1 = FileUtil.listFile(new File(DEFAULT_PATH + "learn/NoPlate"), Constant.DEFAULT_TYPE, false);
+         List<File> imgList1 = FileUtil.listFile(new File(DEFAULT_PATH + "learn/NoPlate"), Constants.DEFAULT_TYPE, false);
         // 标记：正样本用 0 表示，负样本用 1 表示。
         int labels[] = createLabelArray(imgList0.size(), imgList1.size());
         int sample_num = labels.length; // 图片数量
@@ -273,6 +273,4 @@ public class SVMTrain {
         // 识别，判断样本文件是否是车牌
         //predict();
     }
-
-
 }

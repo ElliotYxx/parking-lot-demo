@@ -34,4 +34,12 @@ public interface UserService {
      * @return 角色名
      **/
     String findRoles(String username);
+
+    /**
+     * 修改用户密码
+     * @param id 用户id
+     * @param password 用户密码
+     * @return
+     */
+    Integer resetUserPwd(Long id, String password);
 }

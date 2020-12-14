@@ -35,8 +35,19 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param userId 用户id
      * @param state 用户状态代码
      */
+    @Transactional
     @Modifying
     @Query("update User u set u.state = :state where u.id = :userId")
     void updateUserState(@Param("userId") Long userId, @Param("state") Integer state);
 
+    /**
+     * 修改用户的密码
+     * @param userId 用户id
+     * @param password 用户密码
+     * @return
+     */
+    @Transactional
+    @Modifying
+    @Query("update User u set u.password = :password where u.id = :userId")
+    Integer resetUserPwd(@Param("userId") Long userId, @Param("password") String password);
 }

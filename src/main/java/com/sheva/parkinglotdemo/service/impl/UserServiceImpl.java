@@ -5,6 +5,7 @@ import com.sheva.parkinglotdemo.repository.UserRepository;
 import com.sheva.parkinglotdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author Sheva
@@ -15,7 +16,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
 
     @Override
     public User saveUser(User user) {
@@ -36,4 +36,7 @@ public class UserServiceImpl implements UserService {
     public String findRoles(String username) {
         return userRepository.findRoles(username);
     }
+
+    @Override
+    public Integer resetUserPwd(Long id, String password){ return userRepository.resetUserPwd(id, password); }
 }

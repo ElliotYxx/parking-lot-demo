@@ -1,6 +1,6 @@
 package com.sheva.parkinglotdemo.utils;
 
-import com.sheva.parkinglotdemo.constant.Constant;
+import com.sheva.parkinglotdemo.constant.Constants;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -323,7 +323,7 @@ public class ImageUtil {
                 }
 
                 // 处理切图，调整为指定大小
-                Mat resized = new Mat(Constant.DEFAULT_HEIGHT, Constant.DEFAULT_WIDTH, TYPE);
+                Mat resized = new Mat(Constants.DEFAULT_HEIGHT, Constants.DEFAULT_WIDTH, TYPE);
                 Imgproc.resize(img_crop, resized, resized.size(), 0, 0, Imgproc.INTER_CUBIC); // INTER_AREA 缩小图像的时候使用 ; INTER_CUBIC 放大图像的时候使用
                 debugImg(debug, tempPath, "crop_resize", resized);
                 dst.add(resized);
@@ -450,7 +450,7 @@ public class ImageUtil {
         }
         // 计算到的错切值，大于0，则上边线向右，下边线向左拉伸； 小于0，则上边线向左，下边线向右拉伸
         double shearPX = 2 * distanceSum / result.size();
-        if( Constant.DEFAULT_MIN_SHEAR_PX > shearPX || shearPX > Constant.DEFAULT_MAX_SHEAR_PX) {
+        if( Constants.DEFAULT_MIN_SHEAR_PX > shearPX || shearPX > Constants.DEFAULT_MAX_SHEAR_PX) {
             return rect_size;
         }
         // 距离跟坐标排序，判断需要错切的方向
@@ -583,8 +583,8 @@ public class ImageUtil {
      */
     private static boolean checkPlateSize(RotatedRect mr) {
         // 切图面积取值范围
-        int min = Constant.DEFAULT_MIN_SIZE;
-        int max = Constant.DEFAULT_MAX_SIZE;
+        int min = Constants.DEFAULT_MIN_SIZE;
+        int max = Constants.DEFAULT_MAX_SIZE;
         // 计算切图面积
         int area = (int) (mr.size.height * mr.size.width);
         // 计算切图宽高比
@@ -592,7 +592,7 @@ public class ImageUtil {
         if (r < 1) {  // 特殊情况下，获取到的width  height 值是相反的
             r = mr.size.height / mr.size.width;
         }
-        return min <= area && area <= max && Constant.DEFAULT_MIN_RATIO <= r && r <= Constant.DEFAULT_MAX_RATIO;
+        return min <= area && area <= max && Constants.DEFAULT_MIN_RATIO <= r && r <= Constants.DEFAULT_MAX_RATIO;
     }
 
 
@@ -904,7 +904,7 @@ public class ImageUtil {
 
 
     public static void main(String[] args) {
-        String tempPath = Constant.DEFAULT_TEST_DIR;
+        String tempPath = Constants.DEFAULT_TEST_DIR;
         String filename = tempPath + "26.jpg";
         File f = new File(filename);
         if(!f.exists()) {
@@ -914,7 +914,7 @@ public class ImageUtil {
         }
         Mat inMat = Imgcodecs.imread(filename);
         Mat dst = inMat.clone();
-        morphologyOpen(inMat, dst, true, Constant.DEFAULT_TEMP_DIR);
+        morphologyOpen(inMat, dst, true, Constants.DEFAULT_TEMP_DIR);
     }
 
 
