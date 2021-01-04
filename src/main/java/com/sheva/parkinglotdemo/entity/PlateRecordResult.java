@@ -1,6 +1,6 @@
 package com.sheva.parkinglotdemo.entity;
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.opencv.core.Rect;
 
 /**
@@ -8,7 +8,8 @@ import org.opencv.core.Rect;
  * @Author Sheva
  * @Date 2020/11/25
  */
-@Data
+@Getter
+@Setter
 public class PlateRecordResult {
 
     /**
