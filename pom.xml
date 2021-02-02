@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>2.1.18.RELEASE</version>
+<!--            <version>2.1.18.RELEASE</version>-->
         </dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
@@ -64,8 +64,6 @@
             <groupId>com.github.theborakompanioni</groupId>
             <artifactId>thymeleaf-extras-shiro</artifactId>
         </dependency>
-
-
         <!-- io常用工具类 -->
         <dependency>
             <groupId>commons-io</groupId>

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,9 +59,10 @@ public class SysUserController extends BaseController {
     }
 
     @GetMapping("/list")
-    public String list(){
+    public String list(ModelMap map, HttpServletRequest request){
+        User currUser = (User)request.getSession().getAttribute("user");
+        log.info("当前用户为：[" + currUser.toString() + "]");
+        map.put("user", currUser);
         return "user/list";
     }
-
-
 }
