@@ -1,6 +1,8 @@
 package com.sheva.parkinglotdemo.service;
 
-import com.sheva.parkinglotdemo.entity.User;
+import com.sheva.parkinglotdemo.domain.entity.User;
+
+import java.util.List;
 
 /**
  * @Author Sheva
@@ -27,6 +29,12 @@ public interface UserService {
      * @return
      */
     User findByUsername(String username);
+
+    /**
+     * 查找所有用户
+     * @return
+     */
+    List<User> findAll();
 
     /**
      * 通过用户名查找用户

@@ -1,7 +1,6 @@
-package com.sheva.parkinglotdemo.entity;
+package com.sheva.parkinglotdemo.domain.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +10,8 @@ import javax.persistence.Id;
  * @Author Sheva
  * @Date 2020/11/24
  */
+@Data
 @Entity
-@Getter
-@Setter
 public class Role {
     @Id
     private Integer id;

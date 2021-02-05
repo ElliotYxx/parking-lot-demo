@@ -1,4 +1,4 @@
-package com.sheva.parkinglotdemo.text;
+package com.sheva.parkinglotdemo.utils.text;
 
 import com.sheva.parkinglotdemo.utils.StringUtils;
 import java.math.BigDecimal;

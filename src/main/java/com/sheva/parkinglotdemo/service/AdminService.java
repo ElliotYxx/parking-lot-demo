@@ -1,5 +1,7 @@
 package com.sheva.parkinglotdemo.service;
 
+import com.sheva.parkinglotdemo.domain.entity.User;
+
 /**
  * @Author Sheva
  * @Date 2020/11/25
@@ -10,14 +12,22 @@ public interface AdminService {
     /**
      * 删除用户
      * @param id 用户id
+     * @return
      */
-    void deleteUser(Long id);
+    void deleteUserById(Long id);
+
+    /**
+     * 批量删除用户
+     * @param ids 用户id
+     * @return
+     */
+    Integer deleteUserByIds(String ids);
 
     /**
      * 更新用户状态
-     * @param userId 用户id
-     * @param state 用户状态
+     * @param user 用户实体类
+     * @return
      */
-    void updateUserState(Long userId, Integer state);
+    Integer changeStatus(User user);
 
 }

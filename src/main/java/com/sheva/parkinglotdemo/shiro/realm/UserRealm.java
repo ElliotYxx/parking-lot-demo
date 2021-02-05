@@ -1,6 +1,6 @@
 package com.sheva.parkinglotdemo.shiro.realm;
 
-import com.sheva.parkinglotdemo.entity.User;
+import com.sheva.parkinglotdemo.domain.entity.User;
 import com.sheva.parkinglotdemo.service.UserService;
 import com.sheva.parkinglotdemo.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +29,10 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String useranme = (String) principals.getPrimaryPrincipal();
-        log.info("当前用户为: [" + useranme + "]");
+        String username = (String) principals.getPrimaryPrincipal();
+        log.info("当前用户为: [" + username + "]");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        String roleName = userService.findRoles(useranme);
+        String roleName = userService.findRoles(username);
         Set<String> set = new HashSet<>();
         set.add(roleName);
         info.setRoles(set);
@@ -54,7 +54,7 @@ public class UserRealm extends AuthorizingRealm {
             log.error("用户名或密码错误...");
             throw new UnknownAccountException();
         }
-        if (user.getState().equals(1)){
+        if (user.getStatus().equals(1)){
             log.error("用户已经被封禁...");
             throw new LockedAccountException();
         }

@@ -1,4 +1,4 @@
-package com.sheva.parkinglotdemo.entity;
+package com.sheva.parkinglotdemo.domain;
 
 import com.sheva.parkinglotdemo.utils.StringUtils;
 
@@ -7,6 +7,7 @@ import java.util.HashMap;
 /**
  * @Author Sheva
  * @Date 2020/12/3
+ * 结果返回信息的ajax请求封装
  */
 public class AjaxResult extends HashMap<String, Object> {
 

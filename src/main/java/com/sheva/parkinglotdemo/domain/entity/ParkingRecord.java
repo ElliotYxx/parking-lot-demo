@@ -1,4 +1,4 @@
-package com.sheva.parkinglotdemo.entity;
+package com.sheva.parkinglotdemo.domain.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
@@ -20,7 +20,6 @@ public class ParkingRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column
     private String plateNumber;
     @Column

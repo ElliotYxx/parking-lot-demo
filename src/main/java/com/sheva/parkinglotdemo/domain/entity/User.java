@@ -1,5 +1,6 @@
-package com.sheva.parkinglotdemo.entity;
+package com.sheva.parkinglotdemo.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -24,9 +25,11 @@ public class User {
     @Column
     private String password;
     @Column
+    @JsonFormat(shape= JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp createTime;
+    /** 用户状态 0正常  1停用 **/
     @Column
-    private Integer state;
+    private Integer status;
     @Column
     private Long roleId;
 

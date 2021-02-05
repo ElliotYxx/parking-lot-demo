@@ -1,9 +1,8 @@
 package com.sheva.parkinglotdemo.controller.system;
 
-import com.sheva.parkinglotdemo.entity.User;
+import com.sheva.parkinglotdemo.domain.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -28,5 +27,10 @@ public class SysIndexController {
         log.info("当前用户为：[" + currUser.toString() + "]");
         map.put("user", currUser);
         return "index";
+    }
+
+    @GetMapping("/system/main")
+    public String main(){
+        return "main";
     }
 }

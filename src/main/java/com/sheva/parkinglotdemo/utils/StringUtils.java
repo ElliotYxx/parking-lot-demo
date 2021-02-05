@@ -2,7 +2,7 @@ package com.sheva.parkinglotdemo.utils;
 import java.util.Collection;
 import java.util.Map;
 
-import com.sheva.parkinglotdemo.text.StrFormatter;
+import com.sheva.parkinglotdemo.utils.text.StrFormatter;
 
 /**
  * 字符串工具类

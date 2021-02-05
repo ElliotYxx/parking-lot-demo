@@ -1,6 +1,6 @@
 package com.sheva.parkinglotdemo.repository;
 
-import com.sheva.parkinglotdemo.entity.ParkingRecord;
+import com.sheva.parkinglotdemo.domain.entity.ParkingRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Date 2020/12/1
  */
 public interface ParkRepository extends JpaRepository<ParkingRecord, Long> {
-
 }

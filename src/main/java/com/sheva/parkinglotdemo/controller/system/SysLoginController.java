@@ -1,8 +1,8 @@
 package com.sheva.parkinglotdemo.controller.system;
 
 import com.sheva.parkinglotdemo.controller.BaseController;
-import com.sheva.parkinglotdemo.entity.AjaxResult;
-import com.sheva.parkinglotdemo.entity.User;
+import com.sheva.parkinglotdemo.domain.AjaxResult;
+import com.sheva.parkinglotdemo.domain.entity.User;
 import com.sheva.parkinglotdemo.service.UserService;
 import com.sheva.parkinglotdemo.utils.ServletUtils;
 import lombok.extern.slf4j.Slf4j;

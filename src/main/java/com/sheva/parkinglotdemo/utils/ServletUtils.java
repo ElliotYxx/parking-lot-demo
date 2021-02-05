@@ -1,6 +1,6 @@
 package com.sheva.parkinglotdemo.utils;
 
-import com.sheva.parkinglotdemo.text.Convert;
+import com.sheva.parkinglotdemo.utils.text.Convert;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
